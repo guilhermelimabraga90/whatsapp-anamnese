@@ -25,14 +25,10 @@ def atualizar_dados(secao,telefone):
     SESSOES[telefone] = secao
 
 def avancar_proxima_secao(secao_atual, telefone):
-    proxima_secao = False
-    lista_secao = sections.SECOES
-    for secao in lista_secao:
-        if proxima_secao:
-            secao_aux = SESSOES[telefone]
-            secao_aux["secao_atual"] = secao
-            SESSOES[telefone] = secao_aux
-            return secao
+    for i, secao in enumerate(sections.SECOES):
         if secao['id'] == secao_atual:
             SESSOES[telefone]["secoes_concluidas"].append(secao_atual)
-            proxima_secao = True
+            if i + 1 < len(sections.SECOES):
+                SESSOES[telefone]["secao_atual"] = sections.SECOES[i + 1]
+                return sections.SECOES[i + 1]
+            return None
