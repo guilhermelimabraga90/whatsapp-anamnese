@@ -3,9 +3,10 @@ import os
 
 load_dotenv()
 
-WHATSAPP_TOKEN = os.getenv('WHATSAPP_TOKEN')
-WHATSAPP_PHONE_ID = os.getenv('WHATSAPP_PHONE_ID')
-VERIFY_TOKEN = os.getenv('VERIFY_TOKEN')
 ANTHROPIC = os.getenv('ANTHROPIC_API_KEY')
+
+EVOLUTION_API_URL = os.getenv('EVOLUTION_API_URL', 'http://localhost:8080')
+EVOLUTION_API_KEY = os.getenv('EVOLUTION_API_KEY')
+EVOLUTION_INSTANCE = os.getenv('EVOLUTION_INSTANCE', 'anamnese-bot')
 
 APP_ENV = os.getenv('APP_ENV')

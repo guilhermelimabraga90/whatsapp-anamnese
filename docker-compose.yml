@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: evolution
+      POSTGRES_PASSWORD: evolution123
+      POSTGRES_DB: evolution
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evolution"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  evolution-api:
+    image: evoapicloud/evolution-api:v2.3.7
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_URL=http://localhost:8080
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_URL=postgresql://evolution:evolution123@postgres:5432/evolution?schema=public
+      - DATABASE_CONNECTION_URI=postgresql://evolution:evolution123@postgres:5432/evolution?schema=public
+      - AUTHENTICATION_API_KEY=minha_chave_123
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://redis:6379
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1035194821
+      - QRCODE_LIMIT=30
+
+volumes:
+  postgres_data:

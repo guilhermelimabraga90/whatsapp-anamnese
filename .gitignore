@@ -1,4 +1,19 @@
+# Ambiente
 .env
+venv/
+
+# Python
 __pycache__/
 *.pyc
+
+# Artefatos gerados
+vector_store/
 output/
+qrcode.png
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code (configurações locais)
+.claude/settings.local.json
