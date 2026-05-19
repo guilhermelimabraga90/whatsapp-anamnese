@@ -7,7 +7,7 @@ import os
 PERSIST_DIR = "vector_store"
 PDF_DIR = "uploads/pdfs"
 
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+embeddings = HuggingFaceEmbeddings(model_name="paraphrase-multilingual-MiniLM-L12-v2")
 
 
 def indexar_pdfs():
